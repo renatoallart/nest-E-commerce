@@ -1,0 +1,92 @@
+# ------------------------------------------------------
+# THIS FILE WAS AUTOMATICALLY GENERATED (DO NOT MODIFY)
+# ------------------------------------------------------
+
+type Category {
+  id: String!
+  name: String!
+  products: [Product!]!
+}
+
+type Review {
+  id: String!
+  comment: String!
+  productId: String!
+  product: Product!
+}
+
+type Product {
+  id: ID!
+  name: String!
+  image: String!
+  description: String!
+  quantity: String!
+  price: Float!
+  onSale: Boolean!
+  categoryId: String!
+  category: Category!
+  reviewId: String!
+  reviews: [Review!]!
+}
+
+type Query {
+  products: [Product!]!
+  product(id: String!): Product!
+  getReviewByProduct(productId: String!): Product!
+  findProductsByCategory(id: String!): [Product!]!
+  categories: [Category!]!
+
+  """fetch 10 product by selected category"""
+  getProductByCategory(name: String!): Category!
+  category(id: String!): Category!
+  getOneRev(id: String!): Review!
+  allReviews: [Review!]!
+  reviews(name: String!): Review!
+}
+
+type Mutation {
+  createProduct(createProductInput: CreateProductInput!): Product!
+  updateProduct(updateProductInput: UpdateProductInput!): Product!
+  removeProduct(id: String!): Product!
+  createCategory(createCategoryInput: CreateCategoryInput!): Category!
+  removeCategory(id: String!): Category!
+  createReview(createReviewInput: CreateReviewInput!): Review!
+  updateReview(updateReviewInput: UpdateReviewInput!): Review!
+  removeReview(id: Int!): Review!
+}
+
+input CreateProductInput {
+  name: String!
+  description: String!
+  image: String!
+  quantity: Float!
+  price: Float!
+  onSale: Boolean!
+  categoryId: ID!
+}
+
+input UpdateProductInput {
+  name: String!
+  description: String
+  image: String
+  quantity: Float
+  price: Float
+  onSale: Boolean
+  categoryId: ID
+  id: ID!
+}
+
+input CreateCategoryInput {
+  name: String!
+}
+
+input CreateReviewInput {
+  comment: String!
+  productId: ID!
+}
+
+input UpdateReviewInput {
+  comment: String!
+  productId: ID
+  id: ID!
+}
